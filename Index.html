@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agios : récupérez les frais bancaires prélevés à tort</title>
+<meta name="description" content="Votre dossier en 3 jours : toutes vos lignes de frais repérées, comparées aux plafonds légaux, avec le courrier de réclamation prêt. 19 €, satisfait ou remboursé.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Récupérez les frais bancaires prélevés à tort">
+<meta property="og:description" content="Vos frais repérés sur douze mois, comparés aux plafonds légaux, avec le courrier de réclamation prêt. 19 €, satisfait ou remboursé.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F4A32'/%3E%3Cpath d='M9 24 16 8l7 16M11.5 19h9' stroke='%23E5A823' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F5F1; --paper:#FFFFFF; --ink:#17201B; --muted:#4A574F;
+  --sapin:#0F4A32; --ocre:#E5A823; --ocre-fond:#FBEFD0; --line:#D3DCD4;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:1.0625rem/1.6 var(--sans);padding-bottom:5.5rem}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1.25rem}
+a{color:var(--sapin)}
+:focus-visible{outline:3px solid var(--sapin);outline-offset:3px;border-radius:4px}
+h1,h2{font-family:var(--serif);font-weight:700;color:var(--sapin);margin:0}
+h1{font-size:clamp(2rem,7.2vw,3.3rem);line-height:1.08;letter-spacing:-.015em}
+h2{font-size:clamp(1.45rem,4.6vw,1.9rem);line-height:1.2;margin-bottom:1rem}
+p{margin:0 0 1rem}
+header{padding:1.1rem 0}
+.logo{font-family:var(--serif);font-weight:700;font-size:1.5rem;color:var(--sapin);text-decoration:none}
+
+.hero{padding:1.25rem 0 2.5rem;display:grid;gap:2rem}
+.lead{font-size:1.15rem;color:var(--muted);max-width:34rem;margin-top:1.1rem}
+.btn{display:block;text-align:center;background:var(--ocre);color:var(--sapin);font-weight:700;font-size:1.1rem;text-decoration:none;padding:1rem 1.4rem;min-height:3.25rem;border-radius:.6rem;border:2px solid var(--sapin)}
+.btn:hover{background:#F0B93A}
+.assure{font-size:.95rem;color:var(--muted);margin:.8rem 0 0}
+.assure strong{color:var(--ink)}
+
+.releve{background:var(--paper);border:1px solid var(--line);border-radius:.4rem;padding:1rem 1rem .8rem;font-size:.97rem;box-shadow:0 1px 0 var(--line)}
+.releve h2{font-family:var(--sans);font-size:.95rem;color:var(--muted);font-weight:600;margin:0 0 .6rem}
+.ligne{display:flex;justify-content:space-between;gap:1rem;padding:.45rem .5rem;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.ligne span:last-child{white-space:nowrap}
+.frais{background:var(--ocre-fond);border-left:5px solid var(--ocre);font-weight:600}
+.total{display:flex;justify-content:space-between;gap:1rem;padding:.7rem .5rem .2rem;font-weight:700;color:var(--sapin);font-variant-numeric:tabular-nums}
+.legende{font-size:.88rem;color:var(--muted);margin:.6rem 0 0}
+
+section{padding:2.25rem 0;border-top:1px solid var(--line)}
+.col{max-width:40rem}
+.contenu{list-style:none;margin:0;padding:0}
+.contenu li{padding:.9rem 0;border-bottom:1px solid var(--line)}
+.contenu li:first-child{padding-top:0}
+.contenu strong{display:block;color:var(--sapin)}
+ol.etapes{margin:0;padding:0;list-style:none;counter-reset:e}
+ol.etapes li{counter-increment:e;position:relative;padding:0 0 1.1rem 2.6rem}
+ol.etapes li::before{content:counter(e);position:absolute;left:0;top:0;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--sapin);color:#fff;font-weight:700;text-align:center;line-height:1.9rem}
+.petit{font-size:.95rem;color:var(--muted)}
+.garantie{background:var(--sapin);color:#fff;border-top:0}
+.garantie h2{color:#fff}
+.garantie a{color:var(--ocre)}
+.garantie .btn{margin-top:1.4rem}
+details{border-bottom:1px solid var(--line);padding:.9rem 0}
+summary{cursor:pointer;font-weight:700;color:var(--sapin);min-height:2.2rem}
+details p{margin:.6rem 0 0}
+
+.legal h2{font-size:1.3rem;margin-top:.4rem}
+.legal h3{font-size:1.02rem;margin:1.2rem 0 .3rem}
+.legal{font-size:.97rem}
+mark{background:#FFE08A;color:var(--ink);padding:0 .2em;border-radius:.2em}
+footer{padding:1.6rem 0 2rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:.6rem}
+
+.barre{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:.7rem 1.25rem calc(.7rem + env(safe-area-inset-bottom));z-index:10}
+.barre .btn{margin:0 auto;max-width:30rem}
+
+@media (min-width:860px){
+  body{padding-bottom:0}
+  .barre{display:none}
+  .hero{grid-template-columns:1.1fr .9fr;align-items:center;gap:3rem;padding:2.5rem 0 3.5rem}
+  .btn{display:inline-block}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap"><a class="logo" href="#">Agios</a></div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <h1>Récupérez les frais bancaires prélevés à tort sur votre compte.</h1>
+      <p class="lead">Commissions d'intervention, frais de rejet, options sans usage : ils s'ajoutent par petites lignes illisibles. La plupart sont plafonnés par la loi, souvent négociables, et presque jamais contestés.</p>
+      <a class="btn" href="https://buy.stripe.com/test_6oUbJ1bxefDdaB16uQdjO00">Récupérer mon dossier, 19 €</a>
+      <p class="assure"><strong>Satisfait ou remboursé pendant 14 jours.</strong> Paiement unique, sans abonnement.</p>
+    </div>
+
+    <div class="releve" role="img" aria-label="Exemple fictif de relevé bancaire où trois lignes de frais totalisent 31,40 euros en un mois">
+      <h2>Exemple de relevé, septembre</h2>
+      <div class="ligne"><span>02/09 Prélèvement loyer</span><span>620,00 €</span></div>
+      <div class="ligne frais"><span>05/09 Commission d'intervention</span><span>8,00 €</span></div>
+      <div class="ligne frais"><span>05/09 Frais de rejet de prélèvement</span><span>20,00 €</span></div>
+      <div class="ligne"><span>09/09 Carte supermarché</span><span>54,18 €</span></div>
+      <div class="ligne frais"><span>12/09 Option sécurité compte</span><span>3,40 €</span></div>
+      <div class="total"><span>Frais repérés ce mois-ci</span><span>31,40 €</span></div>
+      <p class="legende">Exemple fictif, pour un seul mois. Votre dossier couvre douze mois.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="col">
+      <h2>Ce que contient votre dossier</h2>
+      <ul class="contenu">
+        <li><strong>Toutes vos lignes de frais, repérées.</strong>Sur les douze derniers mois, sans que vous ayez à les chercher.</li>
+        <li><strong>Le total, comparé aux plafonds légaux.</strong>Vous voyez d'un coup d'œil ce qui dépasse et ce qui peut se contester.</li>
+        <li><strong>Un courrier de réclamation prêt à envoyer.</strong>Adressé à votre agence, rédigé pour que vous n'ayez qu'à le signer.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="col">
+      <h2>Comment ça se passe</h2>
+      <ol class="etapes">
+        <li><strong>Vous payez 19 €</strong> en une fois, par carte, sur la page sécurisée de Stripe.</li>
+        <li><strong>Vous envoyez vos relevés</strong> des douze derniers mois (PDF ou photos nettes) à <a href="mailto:agios.remboursement@gmail.com">agios.remboursement@gmail.com</a>, avec le nom et l'adresse de votre agence.</li>
+        <li><strong>Vous recevez votre dossier par email sous 3 jours</strong> après réception de vos relevés.</li>
+      </ol>
+      <p class="petit">Vous pouvez masquer votre numéro de compte avant l'envoi : il n'est pas nécessaire pour établir le dossier.</p>
+    </div>
+  </section>
+
+</div>
+
+<section class="garantie">
+  <div class="wrap"><div class="col">
+    <h2>Satisfait ou remboursé, 14 jours</h2>
+    <p>Si votre dossier ne vous convient pas, écrivez à <a href="mailto:agios.remboursement@gmail.com">agios.remboursement@gmail.com</a> dans les 14 jours qui suivent sa réception, avec « Remboursement » en objet. Vous êtes remboursé des 19 € sous 5 jours ouvrés, sans avoir à vous justifier.</p>
+    <p>Si votre relevé ne contient aucun frais à contester, vous êtes aussi remboursé. Nous ne pouvons pas, en revanche, décider à la place de votre banque : c'est elle qui accepte ou refuse la réclamation.</p>
+    <a class="btn" href="https://buy.stripe.com/test_6oUbJ1bxefDdaB16uQdjO00">Récupérer mon dossier, 19 €</a>
+  </div></div>
+</section>
+
+<div class="wrap">
+  <section>
+    <div class="col">
+      <h2>Questions fréquentes</h2>
+      <details>
+        <summary>Est-ce que ça marche pour mon cas ?</summary>
+        <p>Si votre compte a connu des découverts, des rejets de prélèvement ou des options facturées, oui : le dossier repère ces lignes et les compare aux plafonds. Il s'adresse aux particuliers et aux petites structures. Si nous ne trouvons aucun frais à contester, vous êtes remboursé.</p>
+      </details>
+      <details>
+        <summary>Combien de temps ça me prend ?</summary>
+        <p>Environ dix minutes pour payer et envoyer vos relevés. Le dossier arrive sous 3 jours. Il vous reste à signer le courrier et à l'envoyer à votre agence.</p>
+      </details>
+      <details>
+        <summary>Et si je veux arrêter ?</summary>
+        <p>Il n'y a rien à résilier : le paiement est unique, sans abonnement. Et vous pouvez demander le remboursement pendant 14 jours après réception du dossier.</p>
+      </details>
+      <details>
+        <summary>À quoi sert exactement ce que je paie ?</summary>
+        <p>Aux 19 € du dossier : l'analyse de vos relevés, le total comparé aux plafonds, et le courrier rédigé. Nous ne prélevons aucune part sur ce que votre banque vous rembourse.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="legal" id="mentions">
+    <div class="col">
+      <h2>Mentions légales</h2>
+      <p><mark>[À COMPLÉTER : nom et prénom de l'éditeur]</mark>, entrepreneur individuel, <mark>[À COMPLÉTER : adresse postale]</mark>, SIRET <mark>[À COMPLÉTER : numéro SIRET]</mark>. Contact : <a href="mailto:agios.remboursement@gmail.com">agios.remboursement@gmail.com</a>.</p>
+      <p>Directeur de la publication : <mark>[À COMPLÉTER : nom et prénom]</mark>.</p>
+      <p>Hébergeur : Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis. Paiements : Stripe Payments Europe, Ltd., Irlande.</p>
+    </div>
+  </section>
+
+  <section class="legal" id="cgv">
+    <div class="col">
+      <h2>Conditions générales de vente</h2>
+      <h3>Objet</h3>
+      <p>Agios vend un dossier personnalisé : repérage des frais bancaires figurant sur les relevés fournis par le client, total comparé aux plafonds légaux, et courrier de réclamation.</p>
+      <h3>Prix et paiement</h3>
+      <p>Le dossier coûte 19 € <mark>[À COMPLÉTER : TTC, ou « TVA non applicable, article 293 B du CGI »]</mark>, payables en une fois par carte, via Stripe.</p>
+      <h3>Livraison</h3>
+      <p>Le dossier est envoyé par email sous 3 jours après réception des relevés lisibles. Le délai court à partir de la réception des relevés, et non du paiement.</p>
+      <h3>Remboursement</h3>
+      <p>Le client peut demander le remboursement dans les 14 jours suivant la réception du dossier, par email, sans justification. Le remboursement intervient sous 5 jours ouvrés. Il est aussi accordé si aucun frais à contester n'a été trouvé.</p>
+      <h3>Responsabilité</h3>
+      <p>Agios prépare le dossier et le courrier. La décision de rembourser ou non appartient à la banque : aucun remboursement par la banque n'est garanti.</p>
+      <h3>Médiation</h3>
+      <p>En cas de litige, le client peut recourir à un médiateur de la consommation : <mark>[À COMPLÉTER : nom et coordonnées du médiateur]</mark>.</p>
+    </div>
+  </section>
+
+  <section class="legal" id="confidentialite">
+    <div class="col">
+      <h2>Politique de confidentialité</h2>
+      <h3>Données reçues</h3>
+      <p>Votre adresse email et les relevés bancaires que vous nous envoyez. Vos données de carte sont traitées par Stripe : nous n'y avons pas accès.</p>
+      <h3>Utilisation</h3>
+      <p>Ces données servent uniquement à établir votre dossier et à répondre à vos messages. Elles ne sont ni vendues ni transmises à votre banque.</p>
+      <h3>Conservation</h3>
+      <p>Vos relevés sont supprimés <mark>[À COMPLÉTER : durée, par exemple 30 jours après la livraison du dossier]</mark>.</p>
+      <h3>Vos droits</h3>
+      <p>Vous pouvez demander l'accès, la correction ou la suppression de vos données en écrivant à <a href="mailto:agios.remboursement@gmail.com">agios.remboursement@gmail.com</a>. Vous pouvez aussi saisir la CNIL (cnil.fr).</p>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Agios, <a href="mailto:agios.remboursement@gmail.com">agios.remboursement@gmail.com</a></div>
+    <nav aria-label="Informations légales">
+      <a href="#mentions">Mentions légales</a>
+      <a href="#cgv">Conditions générales de vente</a>
+      <a href="#confidentialite">Politique de confidentialité</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="barre">
+  <a class="btn" href="https://buy.stripe.com/test_6oUbJ1bxefDdaB16uQdjO00">Récupérer mon dossier, 19 €</a>
+</div>
+
+</body>
+</html>
